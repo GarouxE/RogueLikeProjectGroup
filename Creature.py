@@ -5,11 +5,12 @@ class Creature(Element):
     """A creature that occupies the dungeon.
         Is an Element. Has hit points and strength."""
 
-    def __init__(self, name, hp, abbrv="", strength=1):
+    def __init__(self, name, hp, abbrv="", strength=1, invisible = False):
         Element.__init__(self, name, abbrv)
         self.hp = hp
         self.armure = 0
         self.strength = strength
+        self.is_invisble = invisible
 
     def description(self):
         """Description of the creature"""
@@ -18,6 +19,10 @@ class Creature(Element):
     def meet(self, other):
         """The creature is encountered by an other creature.
             The other one hits the creature. Return True if the creature is dead."""
+        if other.is_invisble:
+            other.abbrv = "I"
+        if self.is_invisble:
+            self.abbrv = "I"
         if self.armure >0:
             self.armure-= other.strength
             if self.armure<0:
@@ -30,3 +35,5 @@ class Creature(Element):
         if self.hp > 0:
             return False
         return True
+
+
