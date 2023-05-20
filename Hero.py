@@ -11,7 +11,7 @@ class Hero(Creature):
 
     def description(self):
         """Description of the hero"""
-        return Creature.description(self) + str(self._inventory)
+        return Creature.description(self) +"armure:"+ str(self.armure)+ str(self._inventory)
 
     def fullDescription(self):
         """Complete description of the hero"""
