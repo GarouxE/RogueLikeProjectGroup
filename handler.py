@@ -13,6 +13,13 @@ def teleport(creature, unique):
     theGame.theGame()._floor.put(c, creature)
     return unique
 
+def armure(hero):
+    if hero.armure <= 7:
+        hero.armure +=3
+    else:
+        hero.armure = 10
+    return True
+
 def throw(power, loss):
     """Throw an object"""
     pass
