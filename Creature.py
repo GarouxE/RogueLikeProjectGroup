@@ -17,7 +17,14 @@ class Creature(Element):
     def meet(self, other):
         """The creature is encountered by an other creature.
             The other one hits the creature. Return True if the creature is dead."""
-        self.hp -= other.strength
+        if self.armure >0:
+            self.armure-= other.strength
+            if self.armure<0:
+                self.armure = 0
+        else:
+            self.hp -= other.strength
+
+
         theGame.theGame().addMessage("The " + other.name + " hits the " + self.description())
         if self.hp > 0:
             return False
