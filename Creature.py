@@ -8,6 +8,7 @@ class Creature(Element):
     def __init__(self, name, hp, abbrv="", strength=1):
         Element.__init__(self, name, abbrv)
         self.hp = hp
+        self.armure = 0
         self.strength = strength
 
     def description(self):
