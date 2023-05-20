@@ -4,7 +4,7 @@ from Coord import Coord
 from Hero import Hero
 from Map import Map
 from Stairs import Stairs
-from handler import heal, teleport, throw
+from handler import heal, teleport, throw , armure
 
 from utils import getch
 import theGame
@@ -16,11 +16,12 @@ class Game(object):
     """ Class representing game state """
 
     """ available equipments """
-    equipments = {0: [Equipment("potion", "!", usage=lambda self, hero: heal(hero)),
+    equipments = {0: [Equipment("potion", "♥", usage=lambda self, hero: heal(hero)),
                       Equipment("gold", "o")],
                   1: [Equipment("potion", "!", usage=lambda self, hero: teleport(hero, True))],
                   2: [Equipment("bow", usage=lambda self, hero: throw(1, True))],
                   3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, False))],
+                  4: [Equipment("armure","S",usage=lambda self , hero : armure(hero))]
                   }
     """ available monsters """
     monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
