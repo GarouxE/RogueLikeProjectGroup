@@ -1,6 +1,11 @@
 import pygame as pg
 import sys
+
+
+import Element
 import theGame
+import Creature
+
 
 
 class Ecran(object):
@@ -8,6 +13,8 @@ class Ecran(object):
     def __init__(self):
         self.game = theGame.theGame()
         self.game.buildFloor()
+        self.hero = self.game._hero
+        self.coord_hero = self.game._floor._rooms[0].center()
         print(self.game._floor)
         pg.init()
         pg.mouse.set_visible(False)
@@ -26,13 +33,24 @@ class Ecran(object):
             for i in range(len(self.game._floor._mat[j])):
                 if self.game._floor._mat[i][j] != self.game._floor.empty:
                         t[(j,i)] = "green"
+                if isinstance(self.game._floor._mat[i][j],Creature.Creature) :
+                    pg.draw.circle(self.screen, 'red',
+                                               (j * 30 + 315, i * 30 + 115), 10)
+                elif isinstance(self.game._floor._mat[i][j],Element.Element):
+                    pg.draw.circle(self.screen, 'blue',
+                                   (j * 30 + 315, i * 30 + 115), 10)
+
         return t
+
+
 
     def dessine_carte(self):
         self.screen.fill("black")
         t = self.donne_carte()
         [pg.draw.rect(self.screen, t[pos], (pos[0] * 30+300, pos[1] * 30+100, 30, 30), 2)
          for pos in t]
+        self.hero = pg.draw.circle(self.screen, 'grey', (self.coord_hero.x * 30 +315, self.coord_hero.y * 30 +115), 10)
+        pg.draw.circle(self.screen, 'green', (self.game._floor._rooms[-1].center().x * 30 + 315, self.game._floor._rooms[-1].center().y  * 30 + 115), 10)
 
     def verifier_sortie(self):
         for event in pg.event.get():
