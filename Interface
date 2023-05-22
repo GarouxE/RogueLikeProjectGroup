@@ -1,0 +1,51 @@
+import pygame as pg
+import sys
+import theGame
+
+
+class Ecran(object):
+
+    def __init__(self):
+        self.game = theGame.theGame()
+        self.game.buildFloor()
+        print(self.game._floor)
+        pg.init()
+        pg.mouse.set_visible(False)
+        self.screen = pg.display.set_mode((1500, 800))
+        self.global_event = pg.USEREVENT + 0
+        self.clock = pg.time.Clock()
+
+    def mettre_a_jour(self):
+        pg.display.flip()
+        self.clock.tick(60)
+        pg.display.set_caption(f'{self.clock.get_fps():.1f}')
+
+    def donne_carte(self):
+        t = {}
+        for j in range(len(self.game._floor._mat)):
+            for i in range(len(self.game._floor._mat[j])):
+                if self.game._floor._mat[i][j] != self.game._floor.empty:
+                        t[(j,i)] = "green"
+        return t
+
+    def dessine_carte(self):
+        self.screen.fill("black")
+        t = self.donne_carte()
+        [pg.draw.rect(self.screen, t[pos], (pos[0] * 30+300, pos[1] * 30+100, 30, 30), 2)
+         for pos in t]
+
+    def verifier_sortie(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                pg.quit()
+                sys.exit()
+
+    def run(self):
+        self.dessine_carte()
+        while True:
+            self.mettre_a_jour()
+            self.verifier_sortie()
+
+
+jeu = Ecran()
+jeu.run()
