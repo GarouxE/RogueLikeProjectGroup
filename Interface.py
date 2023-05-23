@@ -1,11 +1,11 @@
 import pygame as pg
 import sys
+import Sprites
 
 
 import Element
 import theGame
 import Creature
-
 
 
 class Ecran(object):
@@ -29,17 +29,29 @@ class Ecran(object):
 
     def donne_carte(self):
         t = {}
+        print(self.game._floor._mat)
         for j in range(len(self.game._floor._mat)):
             for i in range(len(self.game._floor._mat[j])):
                 if self.game._floor._mat[i][j] != self.game._floor.empty:
-                        t[(j,i)] = "green"
-                if isinstance(self.game._floor._mat[i][j],Creature.Creature) :
-                    pg.draw.circle(self.screen, 'red',
-                                               (j * 30 + 315, i * 30 + 115), 10)
-                elif isinstance(self.game._floor._mat[i][j],Element.Element):
-                    pg.draw.circle(self.screen, 'blue',
-                                   (j * 30 + 315, i * 30 + 115), 10)
+                    t[(j,i)] = "green"
 
+                    if str(self.game._floor._mat[i][j]) == "W" :
+                        self.screen.blit( pg.transform.scale(pg.image.load("Sprites/Bat.png"),(30,30)).convert_alpha(), (j * 30 + 300, i * 30 + 100))
+                    if str(self.game._floor._mat[i][j]) == "B" :
+                        self.screen.blit( pg.transform.scale(pg.image.load("Sprites/Blob.png"),(30,30)).convert_alpha(), (j * 30 + 300, i * 30 + 100))
+                    if str(self.game._floor._mat[i][j]) == "G" :
+                        self.screen.blit( pg.transform.scale(pg.image.load("Sprites/Goblin.png"),(30,30)).convert_alpha(), (j * 30 + 300, i * 30 + 100))
+                    if str(self.game._floor._mat[i][j]) == "O" :
+                        self.screen.blit( pg.transform.scale(pg.image.load("Sprites/Ork.png"),(30,30)).convert_alpha(), (j * 30 + 300, i * 30 + 100))
+                    if str(self.game._floor._mat[i][j]) == "@" :
+                        self.screen.blit( pg.transform.scale(pg.image.load("Sprites/Dragon.png"),(30,30)).convert_alpha(), (j * 30 + 300, i * 30 + 100))
+
+
+
+
+                    #if isinstance(self.game._floor._mat[i][j], Element.Element):
+                        #pg.draw.circle(self.screen, 'blue',(j * 30 + 315, i * 30 + 115), 10)
+        pg.display.flip()
         return t
 
 
