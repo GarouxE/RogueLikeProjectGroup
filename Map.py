@@ -178,3 +178,5 @@ class Map(object):
                 d = c.direction(h)
                 if self.get(c + d) in [Map.ground, self._hero]:
                     self.move(e, d)
+                    if e.is_fast:
+                        self.move(e, self.pos(e).direction(h))
