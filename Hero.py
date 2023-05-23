@@ -8,9 +8,9 @@ class Hero(Creature):
     def __init__(self, name="Hero", hp=10, abbrv="@", strength=2):
         Creature.__init__(self, name, hp, abbrv, strength)
         self._inventory = []
-        self.level: int = 0
-        self.xp_cap: int = 10
-        self.xp: int = 0
+        self.level = 0
+        self.xp_cap = 10
+        self.xp = 0
     
     def description(self):
         """Description of the hero"""
