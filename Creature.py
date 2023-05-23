@@ -41,7 +41,7 @@ class Creature(Element):
         theGame.theGame().addMessage("The " + other.name + " hits the " + self.description())
         if self.hp > 0:
             return False
-        if other.name == "Hero":
+        if other.abbrv == "@":
             other.earn_xp(self.xp)
         return True
 
