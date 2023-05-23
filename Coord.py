@@ -1,4 +1,3 @@
-
 import math
 
 class Coord(object):
@@ -31,10 +30,23 @@ class Coord(object):
         """Returns the direction between two coordinates."""
         d = self - other
         cos = d.x / self.distance(other)
-        if cos > Coord.cos45:
-            return Coord(-1, 0)
-        elif cos < -Coord.cos45:
-            return Coord(1, 0)
-        elif d.y > 0:
-            return Coord(0, -1)
-        return Coord(0, 1)
+        sin = d.y / self.distance(other)
+        if cos >= Coord.cos45:
+            if sin >= Coord.cos45:
+                return Coord(-1, -1)  # haut gauche
+            elif sin <= -Coord.cos45:
+                return Coord(-1, 1)  # bas gauche
+            else:
+                return Coord(-1, 0)  # gauche
+        elif cos <= -Coord.cos45:
+            if sin >= Coord.cos45:
+                return Coord(1, -1)  # haut droite
+            elif sin <= -Coord.cos45:
+                return Coord(1, 1)  # bas droite
+            else:
+                return Coord(1, 0)  # droite
+        elif sin >= Coord.cos45:
+            return Coord(0, -1)  # haut
+        elif sin <= -Coord.cos45:
+            return Coord(0, 1)  # bas
+    #à déterminer avec le programme de déplacement optimal
