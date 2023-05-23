@@ -12,9 +12,9 @@ class Creature(Element):
         self.max_hp = hp
         self.strength = strength
         self.xp = (self.strength*self.max_hp)//2
-        self.is_invisible = invisible
+        self.is_invisble = invisible
         self.is_fast = fast
-        if self.is_invisible:
+        if self.is_invisble:
             self.xp = int(self.xp*1.5)
         if self.is_fast:
             self.xp = int(self.xp*2)
@@ -26,9 +26,9 @@ class Creature(Element):
     def meet(self, other):
         """The creature is encountered by an other creature.
             The other one hits the creature. Return True if the creature is dead."""
-        if other.is_invisible:
+        if other.is_invisble:
             other.abbrv = "I"
-        if self.is_invisible:
+        if self.is_invisble:
             self.abbrv = "I"
         if self.armure >0:
             self.armure-= other.strength
