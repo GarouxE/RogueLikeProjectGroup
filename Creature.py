@@ -7,17 +7,17 @@ class Creature(Element):
 
     def __init__(self, name, hp, abbrv="", strength=1, invisible = False, fast=False):
         Element.__init__(self, name, abbrv)
-        self.hp: int = hp
-        self.armure: int = 0
-        self.max_hp: int = hp
-        self.strength: int = strength
-        self.xp: int = (self.strength*self.max_hp)//2
+        self.hp = hp
+        self.armure = 0
+        self.max_hp = hp
+        self.strength = strength
+        self.xp = (self.strength*self.max_hp)//2
         self.is_invisble = invisible
         self.is_fast = fast
         if self.is_invisible:
-            self.xp: int *= 1.5
+            self.xp *= 1.5
         if self.is_fast:
-            self.xp: int *= 2
+            self.xp *= 2
 
     def description(self):
         """Description of the creature"""
