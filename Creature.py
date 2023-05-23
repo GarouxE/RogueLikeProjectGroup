@@ -5,16 +5,23 @@ class Creature(Element):
     """A creature that occupies the dungeon.
         Is an Element. Has hit points and strength."""
 
-    def __init__(self, name, hp, abbrv="", strength=1, invisible = False):
+    def __init__(self, name, hp, abbrv="", strength=1, invisible = False, fast=False):
         Element.__init__(self, name, abbrv)
-        self.hp = hp
+        self.hp: int = hp
         self.armure = 0
-        self.strength = strength
+        self.max_hp: int = hp
+        self.strength: int = strength
+        self.xp = (self.strength*self.max_hp)//2
         self.is_invisble = invisible
+        self.is_fast = fast
+        if self.is_invisible:
+            self.xp *= 1.5
+        if self.is_fast:
+            self.xp *= 2
 
     def description(self):
         """Description of the creature"""
-        return Element.description(self) + "(" + str(self.hp) + ")"
+        return Element.description(self) + " (%s/%s) " % (self.hp, self.max_hp)
 
     def meet(self, other):
         """The creature is encountered by an other creature.
@@ -34,6 +41,8 @@ class Creature(Element):
         theGame.theGame().addMessage("The " + other.name + " hits the " + self.description())
         if self.hp > 0:
             return False
+        if isinstance(other, Hero):
+            other.earn_xp(self.xp)
         return True
 
 
