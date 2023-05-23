@@ -2,7 +2,10 @@ import theGame
 
 def heal(creature):
     """Heal the creature"""
-    creature.hp += 3
+    if creature.hp <=creature.max_hp - 3:
+        creature.hp += 3
+    else:
+        creature.hp = creature.max_hp
     return True
 
 def teleport(creature, unique):
