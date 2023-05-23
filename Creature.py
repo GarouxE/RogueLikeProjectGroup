@@ -15,9 +15,9 @@ class Creature(Element):
         self.is_invisble = invisible
         self.is_fast = fast
         if self.is_invisible:
-            self.xp *= 1.5
+            self.xp = int(self.xp*1.5)
         if self.is_fast:
-            self.xp *= 2
+            self.xp = self.xp*2
 
     def description(self):
         """Description of the creature"""
