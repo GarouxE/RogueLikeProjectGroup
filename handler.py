@@ -8,12 +8,16 @@ def heal(creature):
         creature.hp = creature.max_hp
     return True
 
+
 def teleport(creature, unique):
     """Teleport the creature"""
-    r = theGame.theGame()._floor.randRoom()
-    c = r.randEmptyCoord()
+    t = []
+    for j in range(len(theGame.theGame()._floor)):
+        for i in range(len(theGame.theGame()._floor)):
+            if str(theGame.theGame()._floor._mat[i][j]) == ".":
+                t.append(Coord.Coord(i,j))
     theGame.theGame()._floor.rm(theGame.theGame()._floor.pos(creature))
-    theGame.theGame()._floor.put(c, creature)
+    theGame.theGame()._floor.put(random.choice(t), creature)
     return unique
 
 def armure(hero):
