@@ -11,6 +11,8 @@ class Hero(Creature):
         self.level = 0
         self.xp_cap = 10
         self.xp = 0
+        self.gold = 0
+        self.goldInventory = {"gold" : self.gold}
     
     def description(self):
         """Description of the hero"""
@@ -27,14 +29,56 @@ class Hero(Creature):
 
     def checkEquipment(self, o):
         """Check if o is an Equipment."""
-        if not isinstance(o, Equipment):
-            raise TypeError('Not a Equipment')
-
+        if not isinstance(o, Equipment) and not isinstance(o, Gold):
+            raise TypeError('Not a Equipment or Gold')
+            
     def take(self, elem):
         """The hero takes adds the equipment to its inventory"""
         self.checkEquipment(elem)
         self._inventory.append(elem)
-
+     
+    def takeGold(self, elem):
+        "the hero add gold to his inventory"
+        self.checkEquipment(elem)
+        self.gold += 1
+        
+    def incrementGold(self, increment):
+        """increments the gold"""
+        self.gold += increment
+    
+    def randTake(self):
+        """the hero recieves a random equipment"""
+        elem = theGame.theGame().randEquipment()
+        if isinstance(elem, Equipment):
+            self.take(elem)
+            theGame.theGame().addMessage("The " + self.name + " recieved a " + elem.name)
+        elif isinstance(elem, Gold):
+            self.takeGold(elem)
+            theGame.theGame().addMessage("The " + self.name + " recieved " + elem.name)
+            
+    def trade(self, value):
+        """substract the value from the hero's amount of gold"""
+        if self.gold >= value:
+            self.gold -= value
+            return True
+        return False
+    
+    def remove(self, elem):
+        """removes an element from the inventory"""
+        self.checkEquipment(elem)
+        self._inventory.remove(elem)
+        
+    def check_elem(self, item):
+        """Verifies if the item is in the Hero inentory"""
+        for elem in self._inventory:
+            if elem.name == item:
+                return elem
+        return None
+    
+    def length_inventory(self):
+        """returns the length of the inventory"""
+        return len(self._inventory)
+    
     def use(self, elem):
         """Use a piece of equipment"""
         if elem is None:
