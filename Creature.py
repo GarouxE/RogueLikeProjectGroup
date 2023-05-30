@@ -18,6 +18,8 @@ class Creature(Element):
             self.xp = int(self.xp*1.5)
         if self.is_fast:
             self.xp = int(self.xp*2)
+        self.key = False
+
 
     def description(self):
         """Description of the creature"""
@@ -43,6 +45,8 @@ class Creature(Element):
             return False
         if other.abbrv == "@":
             other.earn_xp(self.xp)
+        if self.key:
+            theGame.theGame().key()
         return True
 
 
