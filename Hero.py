@@ -1,5 +1,7 @@
 from Creature import Creature
 from Equipment import Equipment
+from Gold import Gold
+import theGame
 
 class Hero(Creature):
     """The hero of the game.
