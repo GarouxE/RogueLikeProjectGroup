@@ -4,7 +4,9 @@ from Room import Room
 from Element import Element
 from Creature import Creature
 from utils import sign
-
+from Shop import Shop
+from Treasure import Treasure
+from Trap import Trap
 import random
 
 class Map(object):
@@ -29,8 +31,13 @@ class Map(object):
         self.generateRooms(7)
         self.reachAllRooms()
         self.put(self._rooms[0].center(), hero)
+        self.put(self._rooms[1].randEmptyCoord(self), Treasure())
+        self.put(self._rooms[1].randEmptyCoord(self), Trap())
+        self.put(self._rooms[1].center(), Shop())
         for r in self._rooms:
-            r.decorate(self)
+            if r != self._rooms[1]:
+                r.decorate(self)
+        self.randMapMonster().key = True
 
     def addRoom(self, room):
         """Adds a room in the map."""
@@ -180,3 +187,11 @@ class Map(object):
                     self.move(e, d)
                     if e.is_fast:
                         self.move(e, self.pos(e).direction(h))
+     
+    def randMapMonster(self):
+        """returns a random monster from the map"""
+        monstersList = []
+        for monster in self._elem:
+            if isinstance(monster, Creature) and monster != self._hero:
+                monstersList.append(monster)
+        return random.choice(monstersList)
