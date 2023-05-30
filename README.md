@@ -14,7 +14,7 @@ On a ajouté:
   magasin                 2                 Lucah     Fait
   piege                   1                 Lucah     Fait
 
-                  Total: 15
+                  Total Fait: 15
 
 Description du projet:
 
