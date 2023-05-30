@@ -5,7 +5,7 @@ from Hero import Hero
 from Map import Map
 from Stairs import Stairs
 from handler import heal, teleport, throw , armure
-
+from Gold import Gold
 from utils import getch
 import theGame
 
@@ -16,9 +16,9 @@ class Game(object):
     """ Class representing game state """
 
     """ available equipments """
-    equipments = {0: [Equipment("potion", "♥", usage=lambda self, hero: heal(hero)),
-                      Equipment("gold", "o")],
-                  1: [Equipment("potion", "!", usage=lambda self, hero: teleport(hero, True))],
+    equipments = {0: [Equipment("healing potion", "♥", usage=lambda self, hero: heal(hero)),
+                      Gold()],
+                  1: [Equipment("teleport potion", "!", usage=lambda self, hero: teleport(hero, True))],
                   2: [Equipment("bow", usage=lambda self, hero: throw(1, True))],
                   3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, False))],
                   4: [Equipment("armure","S",usage=lambda self , hero : armure(hero))]
@@ -87,6 +87,11 @@ class Game(object):
     def randMonster(self):
         """Returns a random monster."""
         return self.randElement(Game.monsters)
+    
+    def key(self):
+        """the Hero recieves key his invventory"""
+        self._hero.take(Equipment("key", '*'))
+        theGame.theGame().addMessage("The "+ self._hero.name +" aquired a key")
 
     def select(self, l):
         print("Choose item> " + str([str(l.index(e)) + ": " + e.name for e in l]))
