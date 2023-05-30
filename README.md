@@ -5,11 +5,13 @@ On a ajouté:
   deplacement intelligent 3                 A la fin
   repos                   1
   armure                  1                 Ewan      Fait   
-  gestion des salles      1                 Lucah     en cours...
-  salle de tresor         2                 Lucah     en cours...
+  gestion des salles      1                 Lucah     Fait
+  salle de tresor         2                 Lucah     Fait
   rapide                  1                 Marius    en cours...
   invisible               1                 Ewan      en cours...
   point d'xp              1                 Marius    Fait
+  magasin                 2                 Lucah     Fait
+  piege                   1                 Lucah     Fait
 
                   Total: 15
 
