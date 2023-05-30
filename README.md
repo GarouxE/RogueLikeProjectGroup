@@ -1,14 +1,15 @@
 # Projet de jeu Rogue Like en groupe de 3
 
 On a ajouté:
-  interface graphique     4                 A la fin
+  interface graphique     4                 Ewan      en cours...
   deplacement intelligent 3                 A la fin
-  repos                   1
+  repos                   1                 Marius    en cours...
   armure                  1                 Ewan      Fait   
   gestion des salles      1                 Lucah     Fait
   salle de tresor         2                 Lucah     Fait
-  rapide                  1                 Marius    en cours...
-  invisible               1                 Ewan      en cours...
+  rapide                  1                 Marius    Fait
+  diagonale               1                 Marius    Fait
+  invisible               1                 Ewan      Fait
   point d'xp              1                 Marius    Fait
   magasin                 2                 Lucah     Fait
   piege                   1                 Lucah     Fait
