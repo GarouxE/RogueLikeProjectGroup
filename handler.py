@@ -1,5 +1,7 @@
 import theGame
 import Coord
+import random
+
 def heal(creature):
     """Heal the creature"""
     if creature.hp <=creature.max_hp - 3:
