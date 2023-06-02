@@ -32,7 +32,8 @@ class Map(object):
         self.reachAllRooms()
         self.put(self._rooms[0].center(), hero)
         self.put(self._rooms[1].randEmptyCoord(self), Treasure())
-        self.put(self._rooms[1].randEmptyCoord(self), Trap())
+        self.put(random.choice(self._rooms).randEmptyCoord(self), Trap())
+        self.put(random.choice(self._rooms).randEmptyCoord(self), Trap())
         self.put(self._rooms[1].center(), Shop())
         for r in self._rooms:
             if r != self._rooms[1]:
