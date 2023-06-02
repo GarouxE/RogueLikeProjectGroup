@@ -21,13 +21,15 @@ class Game(object):
                   1: [Equipment("teleport potion", "!", usage=lambda self, hero: teleport(hero, True))],
                   2: [Equipment("bow", usage=lambda self, hero: throw(1, True))],
                   3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, False))],
-                  4: [Equipment("armure","S",usage=lambda self , hero : armure(hero))]
+                  4: [Equipment("armure","s",usage=lambda self , hero : armure(hero))]
                   }
     """ available monsters """
     monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
                 1: [Creature("Ork", 6, strength=2), Creature("Blob", 10)],
                 2: [Creature("Invisible", 6,abbrv=Map.ground, strength=2, invisible=True)],
-                5: [Creature("Dragon", 20, strength=3)]}
+                3: [Creature("Spider", 5, strength=2, fast=True)],
+                5: [Creature("Dragon", 20, strength=3)],
+                6: [Creature("Reaper", 10, strength=2, invisible=True, fast=True)]}
 
     """ available actions """
     _actions = {'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)),
@@ -46,7 +48,7 @@ class Game(object):
                 'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
                 }
 
-    def __init__(self, level=1, hero=None):
+    def __init__(self, level=0, hero=None):
         self._level = level
         self._messages = []
         if hero == None:
@@ -56,9 +58,10 @@ class Game(object):
 
     def buildFloor(self):
         """Creates a map for the current floor."""
+        self._level += 1
         self._floor = Map(hero=self._hero)
         self._floor.put(self._floor._rooms[-1].center(), Stairs())
-        self._level += 1
+
 
     def addMessage(self, msg):
         """Adds a message in the message list."""
@@ -105,6 +108,7 @@ class Game(object):
         print("--- Welcome Hero! ---")
         while self._hero.hp > 0:
             print()
+            print("niveau:", self._level)
             print(self._floor)
             print(self._hero.description())
             print(self.readMessages())
