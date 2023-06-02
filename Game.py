@@ -60,7 +60,7 @@ class Game(object):
         """Creates a map for the current floor."""
         self._level += 1
         self._floor = Map(hero=self._hero)
-        self._floor.put(self._floor._rooms[-1].center(), Stairs())
+        self._floor.put(self._floor._rooms[-1].randEmptyCoord(self._floor), Stairs())
 
 
     def addMessage(self, msg):
