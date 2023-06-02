@@ -26,10 +26,10 @@ class Game(object):
     """ available monsters """
     monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
                 1: [Creature("Ork", 6, strength=2), Creature("Blob", 10)],
-                2: [Creature("Invisible", 6,abbrv=Map.ground, strength=2, invisible=True)],
+                2: [Creature("Invisible", 6, abbrv=Map.ground, strength=2, invisible=True)],
                 3: [Creature("Spider", 5, strength=2, fast=True)],
                 5: [Creature("Dragon", 20, strength=3)],
-                6: [Creature("Reaper", 10, strength=2, invisible=True, fast=True)]}
+                6: [Creature("Reaper", 10, abbrv=Map.ground, strength=2, invisible=True, fast=True)]}
 
     """ available actions """
     _actions = {'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)),
