@@ -1,5 +1,8 @@
+import random,copy
+
 import pygame as pg
 import sys
+import time
 
 import theGame
 
@@ -7,10 +10,9 @@ Inventaire = {"♥":"Sprites/Health_potion.png",
               "!":"Sprites/Teleport_potion.png",
               "b":"Sprites/Bow.png",
               "w":"Sprites/Portal.png",
-              "S":"Sprites/Shield.png",
+              "Sh":"Sprites/Shield.png",
               "*":"Sprites/Key.png",
 }
-
 
 def drawText(screen, text, x, y, w, h, size=14, color=(255, 0, 255), fontName="comicsansms"):
     """Draws a text centered inside the w and h"""
@@ -29,6 +31,9 @@ class Ecran(object):
         print(self.game._floor)
         pg.init()
 
+        self.shop_items =[None for i in range(4)]
+        self.level = -1
+
         self.screen = pg.display.set_mode((1400, 700))
         self.global_event = pg.USEREVENT + 0
         self.clock = pg.time.Clock()
@@ -45,6 +50,10 @@ class Ecran(object):
             for i in range(len(self.game._floor._mat[j])):
                 if self.game._floor._mat[i][j] != self.game._floor.empty:
                     pg.draw.rect(self.screen, "green", (j * 30 + 200, i * 30 + 50, 30, 30), 1)
+
+                    #self.screen.blit(
+                        #pg.transform.scale(pg.image.load("Sprites/Tile2.jpg"), (30, 30)).convert_alpha(),
+                        #(j * 30 + 200, i * 30 + 50))
                     if str(self.game._floor._mat[i][j]) == "W":
                         self.screen.blit(
                             pg.transform.scale(pg.image.load("Sprites/Bat.png"), (30, 30)).convert_alpha(),
@@ -60,6 +69,10 @@ class Ecran(object):
                     if str(self.game._floor._mat[i][j]) == "G":
                         self.screen.blit(
                             pg.transform.scale(pg.image.load("Sprites/Goblin.png"), (30, 30)).convert_alpha(),
+                            (j * 30 + 200, i * 30 + 50))
+                    if str(self.game._floor._mat[i][j]) == "R":
+                        self.screen.blit(
+                            pg.transform.scale(pg.image.load("Sprites/Reaper.png"), (30, 30)).convert_alpha(),
                             (j * 30 + 200, i * 30 + 50))
                     if str(self.game._floor._mat[i][j]) == "O":
                         self.screen.blit(
@@ -97,10 +110,6 @@ class Ecran(object):
                         self.screen.blit(
                             pg.transform.scale(pg.image.load("Sprites/Dragon.png"), (30, 30)).convert_alpha(),
                             (j * 30 + 200, i * 30 + 50))
-                    if str(self.game._floor._mat[i][j]) == "D":
-                        self.screen.blit(
-                            pg.transform.scale(pg.image.load("Sprites/Dragon.png"), (30, 30)).convert_alpha(),
-                            (j * 30 + 200, i * 30 + 50))
                     if str(self.game._floor._mat[i][j]) == "S":
                         self.screen.blit(
                             pg.transform.scale(pg.image.load("Sprites/Shop.png"), (30, 30)).convert_alpha(),
@@ -114,7 +123,7 @@ class Ecran(object):
 
         pg.display.flip()
         self.n += 1
-        print(self.hero.hp)
+
 
     def dessine_sante(self):
         pg.draw.rect(self.screen, "green", (1250, 90, 80,90), 0)
@@ -154,6 +163,167 @@ class Ecran(object):
                 pg.transform.scale(pg.image.load(Inventaire[str(self.hero._inventory[i])]), (50, 50)).convert_alpha(),
                 (800+50*i, 400))
             pg.draw.rect(self.screen, "white", (800+50*i, 400, 50, 50), 1)
+        drawText(self.screen, str(self.hero.gold), 1250,200, 0, 0, size=24,color="yellow")
+        self.screen.blit(
+            pg.transform.scale(pg.image.load("Sprites/Gold.png"), (50, 50)).convert_alpha(),
+            (1275,175))
+        drawText(self.screen,"XP:"+ str(self.hero.xp)+"/"+str(self.hero.xp_cap), 1300, 75, 0, 0, size=24, color="green")
+
+    def draw_shop_items(self):
+        if theGame.theGame()._level != self.level:
+            self.level = theGame.theGame()._level
+            for i in range(4):
+                self.shop_items[i] = random.choice(copy.copy(theGame.theGame().shop_items))
+
+    def selling_shop(self):
+        self.screen.fill("black")
+        self.screen.blit(pg.transform.scale(pg.image.load("Sprites/Shop_interior.png"), (1500, 700)).convert_alpha(),
+                         (0, 0))
+        pg.draw.rect(self.screen, "black", (0, 0, 1500, 70), 0)
+
+        drawText(self.screen, "Press E to exit the shop", 200, 20, 0, 0, size=24)
+        drawText(self.screen, str(self.hero.gold), 1250, 30, 0, 0, size=24, color="yellow")
+        self.screen.blit(
+            pg.transform.scale(pg.image.load("Sprites/Gold.png"), (50, 50)).convert_alpha(),
+            (1275, 20))
+        for i in range(len(self.hero._inventory)):
+            self.screen.blit(
+                pg.transform.scale(pg.image.load(Inventaire[str(self.hero._inventory[i])]), (50, 50)).convert_alpha(),
+                (425 + 50 * i, 400))
+            drawText(self.screen, str(theGame.theGame().shop_prices[str(self.hero._inventory[i])]),
+                     450 + 50 * i, 450, 0, 0, color="yellow", size=24)
+            drawText(self.screen, str(i),
+                     450 + 50 * i, 475, 0, 0, color="blue", size=25)
+
+        pg.display.flip()
+        while True:
+            for event in pg.event.get():
+                if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN   and event.key == pg.K_e:
+                    return
+                if 0 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_0:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[0])])
+                        self.hero._inventory.remove(self.hero._inventory[0])
+                        return
+                if 1 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_1:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[1])])
+                        self.hero._inventory.remove(self.hero._inventory[1])
+                        return
+                if 2 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_2:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[2])])
+                        self.hero._inventory.remove(self.hero._inventory[2])
+                        return
+                if 3 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_3:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[3])])
+                        self.hero._inventory.remove(self.hero._inventory[3])
+                        return
+                if 4 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_4:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[4])])
+                        self.hero._inventory.remove(self.hero._inventory[4])
+                        return
+                if 5 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_5:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[5])])
+                        self.hero._inventory.remove(self.hero._inventory[5])
+                        return
+                if 6 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_6:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[6])])
+                        self.hero._inventory.remove(self.hero._inventory[6])
+                        return
+                if 7 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_7:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[7])])
+                        self.hero._inventory.remove(self.hero._inventory[7])
+                        return
+                if 8 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_8:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[8])])
+                        self.hero._inventory.remove(self.hero._inventory[8])
+                        return
+                if 9 in range(len(self.hero._inventory)):
+                    if event.type == pg.KEYDOWN and event.key == pg.K_9:
+                        self.hero.gold += int(theGame.theGame().shop_prices[str(self.hero._inventory[9])])
+                        self.hero._inventory.remove(self.hero._inventory[9])
+                        return
+    def shop(self):
+        self.screen.fill("black")
+        self.screen.blit(pg.transform.scale(pg.image.load("Sprites/Shop_interior.png"), (1500, 700)).convert_alpha(),
+                         (0, 0))
+        pg.draw.rect(self.screen, "black", (0,0, 1500, 70), 0)
+
+        drawText(self.screen, "Press E to exit the shop and S to sell an object", 400, 20, 0, 0, size=24)
+        drawText(self.screen, str(self.hero.gold), 1250, 30, 0, 0, size=24, color="yellow")
+        self.screen.blit(
+            pg.transform.scale(pg.image.load("Sprites/Gold.png"), (50, 50)).convert_alpha(),
+            (1275, 20))
+        for i in range(len(self.shop_items)):
+            if self.shop_items[i]:
+                self.screen.blit(
+                    pg.transform.scale(pg.image.load(Inventaire[str(self.shop_items[i])]), (100, 100)).convert_alpha(),
+                    (400 + 100 * i, 350))
+                if int(theGame.theGame().shop_prices[str(self.shop_items[i])]) <= int(self.hero.gold):
+                    drawText(self.screen, str(theGame.theGame().shop_prices[str(self.shop_items[i])]),
+                             450+100*i, 450, 0, 0, color="green",size=24)
+                else:
+                    drawText(self.screen, str(theGame.theGame().shop_prices[str(self.shop_items[i])]), 450 + 100 * i,
+                             450, 0, 0, color="red", size=24)
+                drawText(self.screen, str(i),
+                         450 + 100 * i, 475, 0, 0, color="blue", size=25)
+
+        pg.display.flip()
+        while True:
+            for event in pg.event.get():
+                if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN   and event.key == pg.K_e:
+                    self.hero.shopping = False
+                    return
+                if event.type == pg.KEYDOWN   and event.key == pg.K_s:
+                    self.selling_shop()
+                    self.hero.shopping = False
+                    return
+                if event.type == pg.KEYDOWN   and event.key == pg.K_0:
+                    if self.shop_items[0] and len(self.hero._inventory)<10:
+                        if int(theGame.theGame().shop_prices[str(self.shop_items[0])]) <= int(self.hero.gold) :
+                            self.hero.gold -= int(theGame.theGame().shop_prices[str(self.shop_items[0])])
+                            self.hero._inventory.append(self.shop_items[0])
+                            self.shop_items[0] = None
+                    self.hero.shopping = False
+                    return
+                if event.type == pg.KEYDOWN   and event.key == pg.K_1:
+                    if self.shop_items[1] and len(self.hero._inventory)<10:
+                        if int(theGame.theGame().shop_prices[str(self.shop_items[1])]) <= int(self.hero.gold) :
+                            self.hero.gold -= int(theGame.theGame().shop_prices[str(self.shop_items[1])])
+                            self.hero._inventory.append(self.shop_items[1])
+                            self.shop_items[1] = None
+                    self.hero.shopping = False
+                    return
+                if event.type == pg.KEYDOWN   and event.key == pg.K_2:
+                    if self.shop_items[2] and len(self.hero._inventory)<10:
+                        if int(theGame.theGame().shop_prices[str(self.shop_items[2])]) <= int(self.hero.gold) :
+                            self.hero.gold -= int(theGame.theGame().shop_prices[str(self.shop_items[2])])
+                            self.hero._inventory.append(self.shop_items[2])
+                            self.shop_items[2] = None
+                    self.hero.shopping = False
+                    return
+                if event.type == pg.KEYDOWN   and event.key == pg.K_3:
+                    if self.shop_items[3] and len(self.hero._inventory)<10:
+                        if int(theGame.theGame().shop_prices[str(self.shop_items[3])]) <= int(self.hero.gold) :
+                            self.hero.gold -= int(theGame.theGame().shop_prices[str(self.shop_items[3])])
+                            self.hero._inventory.append(self.shop_items[3])
+                            self.shop_items[3] = None
+                    self.hero.shopping = False
+                    return
+
 
 
 
@@ -164,8 +334,17 @@ class Ecran(object):
         self.dessine_inventaire()
     def select_slot(self):
         while True:
-            drawText(self.screen, "Veuillez choisir item a utiliser ou appuyer sur U pour sortir", 1025, 370, 0, 0, size=14)
-            drawText(self.screen,"A    Z    E    R    T    Y    U    I    O    P",1025,470,0,0,size= 24)
+            drawText(self.screen, "Veuillez choisir item a utiliser ou appuyer sur TAB pour sortir", 1025, 370, 0, 0, size=14)
+            drawText(self.screen,"A",825,470,0,0,size= 24)
+            drawText(self.screen, "Z", 875, 470, 0, 0, size=24)
+            drawText(self.screen, "E", 925, 470, 0, 0, size=24)
+            drawText(self.screen, "R", 975, 470, 0, 0, size=24)
+            drawText(self.screen, "T", 1025, 470, 0, 0, size=24)
+            drawText(self.screen, "Y", 1075, 470, 0, 0, size=24)
+            drawText(self.screen, "U", 1125, 470, 0, 0, size=24)
+            drawText(self.screen, "I", 1175, 470, 0, 0, size=24)
+            drawText(self.screen, "O", 1225, 470, 0, 0, size=24)
+            drawText(self.screen, "P", 1275, 470, 0, 0, size=24)
             pg.display.flip()
             for event in pg.event.get():
                 if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
@@ -182,7 +361,7 @@ class Ecran(object):
                         return "2"
                 if event.type == pg.KEYDOWN   and event.key == pg.K_r:
                     if 3 < len(self.hero._inventory):
-                        return "4"
+                        return "3"
                 if event.type == pg.KEYDOWN   and event.key == pg.K_t:
                     if 4 < len(self.hero._inventory):
                         return "4"
@@ -201,8 +380,12 @@ class Ecran(object):
                 if event.type == pg.KEYDOWN  and event.key == pg.K_p:
                     if 9 < len(self.hero._inventory):
                         return "9"
-                if event.type == pg.KEYDOWN   and event.key == pg.K_u:
+                if event.type == pg.KEYDOWN   and event.key == pg.K_TAB:
                     return None
+
+
+
+
 
     def verifier_evenements(self):
 
@@ -241,15 +424,22 @@ class Ecran(object):
     def run(self):
         self.dessine_carte()
         while True:
+            print(self.game._floor)
             self.mettre_a_jour()
+            self.draw_shop_items()
             c = self.verifier_evenements()
             if c in self.game._actions:
                 self.game._actions[c](self.game._hero)
-
+            if self.hero.shopping:
+                self.shop()
             self.game._floor.moveAllMonsters()
-            print(self.game._floor)
             self.dessine_carte()
+
             if self.hero.hp <= 0:
+                self.screen.fill("black")
+                self.screen.blit(pg.image.load("Sprites/gameOver.png"), (500, 200))
+                pg.display.flip()
+                time.sleep(2)
                 pg.quit()
                 sys.exit()
 
