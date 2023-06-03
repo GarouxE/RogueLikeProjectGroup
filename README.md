@@ -32,10 +32,10 @@ Le Rogue Like (ou rogue-like) est un sous-genre de jeu vidéo de rôle dans lequ
 C'est une composante importante de votre projet que de nombreux développeurs négligent.
 
 3. Comment installer et exécuter le projet :
-Au préalable : Installer tous les modules composant le projet dans le même répertoire, qui est propre à ce jeu.
-Sur Linux : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 main.py 
-Sur Windows : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 .\main.py 
-Sur VS code : ouvrir le fichier main.py puis lancer le jeu.
+- Au préalable : Installer tous les modules composant le projet dans le même répertoire, qui est propre à ce jeu.
+- Sur Linux : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 main.py 
+- Sur Windows : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 .\main.py 
+- Sur VS code : ouvrir le fichier main.py puis lancer le jeu.
 
 4. Comment utiliser le projet :
 Lorsque le jeu est lancé vous vous situé sur une carte remplie de monstres, pour vous déplacer il suffit d’utiliser les touches :  
