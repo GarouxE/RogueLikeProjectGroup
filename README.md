@@ -23,87 +23,62 @@ Table des matieres:
     
 
 
-1. Titre du projet
-C'est le nom du projet. Ca décrit le projet dans son ensemble en une phrase, et aide les gens à comprendre le but principal et la cible du projet.
+1. Titre du projet : Jeu Rogue Like
+Le projet consiste à ajouter des éléments au jeu Rogue que nous avons programmé en TPs 
+pendant ce semestre. A chaque élément est associé un degré de complexité, allant de 1 (facile) à 4 (difficile).
 
 2. Description du projet
+Le Rogue Like (ou rogue-like) est un sous-genre de jeu vidéo de rôle dans lequel le joueur explore un donjon infesté de monstres qu’il doit combattre pour gagner de l’expérience et des trésors. Le genre se caractérise notamment par la génération procédurale de ses niveaux, son système de mort permanente, son gameplay au tour par tour et la représentation des éléments qui le composent par des symboles ASCII sur une carte constituée de tuiles. La plupart des Rogue Like se déroulent dans un univers de fantasy qui reflète l’influence du jeu de rôle sur table Donjons et Dragons sur le genre.
 C'est une composante importante de votre projet que de nombreux développeurs négligent.
 
-Votre description est un aspect extrêmement important de votre projet. Your description is an extremely important aspect of your project. Une description bien conçue vous permet de vous faire remarquer des autres développeurs, mais aussi d'employeurs potentiels.
+3. Comment installer et exécuter le projet
+Au préalable : Installer tous les modules composant le projet dans le même répertoire, qui est propre à ce jeu.
+Sur Linux : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 main.py 
+Sur Windows : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 .\main.py 
+Sur VS code : ouvrir le fichier main.py puis lancer le jeu.
 
-La qualité de la description d'un README différencie souvent un bon projet d'un mauvais. Une bonne description profite de l'occasion pour expliquer et mettre en valeur:
+4. Comment utiliser le projet
+Lorsque le jeu est lancé vous vous situé sur une carte remplie de monstres, pour vous déplacer il suffit d’utiliser les touches :  
+- Flèche de gauche ou ‘q’ (pour aller à gauche) 
+- Flèche de droite ou ‘d’ (pour aller à droite) 
+- Flèche du haut ou ‘z’ (pour aller en haut) 
+- Flèche du bas ou ‘s’ (pour aller en bas) 
+- ‘a’ pour se déplacer diagonalement (en haut à gauche) 
+- ‘e’ pour se déplacer diagonalement (en haut à droite) 
+- ‘w’ pour se déplacer diagonalement (en bas à gauche) 
+- ‘c’ pour se déplacer diagonalement (en bas à droite) 
+Les touches clé : 
+- ‘i’ (info) pour avoir une description entière de votre personnage 
+- ‘u’ (use) pour utiliser un Equipment qui se situe dans l'inventaire 
+- ‘h’ (help) pour savoir toutes les touches possibles 
+- ‘b’ (biographie) pour savoir qui vous êtes 
+- ‘k’ (kill) pour tue votre personnage et quitter le jeu
 
-Ce que votre application fait,
-Pourquoi vous avez utilisé cette technologie,
-Certaines des difficultés rencontrées et les options que vous espérez implémenter dans le futur.
+5. Inclure des crédits
+Ce projet a été effectué en trinôme avec :  
+- Marius Barbaud (BbdMarius) 
+- Garoux Ewan (GarouxE) 
+- Patel Lucah (bogwee) 
 
+6. Licence
+MIT License
 
-3. Table des matières (Optionnel)
-Si votre README est très long, vous pouvez avoir envie d'ajouter une table des matières pour faciliter la navigation entre les différentes sections aux utilisateurs. Cela rendra plus facile aux lecteurs le fait de se déplacer dans votre projet.
+Copyright (c) [2023] [Jeu Rogue Like]
 
-4. Comment installer et exécuter le projet
-Si vous travaillez sur un projet qu'un utilisateur a besoin d'installer ou d'exécuter localement, comme un logiciel portable, vous devriez inclure les étapes requises pour installer votre projet, ainsi que les dépendances requises s'il y en a.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Fournissez une description étape par étape de comment avoir un environnement de développement configuré et opérationnel.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-5. Comment utiliser le projet
-Fournissez des instructions et des exemples pour que les utilisateurs/contributeurs puissent utiliser le projet. Ca leur rendra la tâche plus facile s'ils rencontrent un problème – ils auront toujours un endroit pour voir ce qui est attendu.
-
-Vous pouvez aussi utiliser des aides visuelles en incluant des choses telles que des captures d'écran pour montrer les exemples de projets en fonctionnement ainsi que les principes de structure et de design utilisés dans votre projet.
-
-Enfin, si votre projet requiert de l'authentification comme des mots de passe ou des noms d'utilisateurs, c'est une bonne section pour inclure les identifiants.
-
-6. Inclure des crédits
-Si vous avez travaillé sur le projet en tant qu'équipe ou organisation, citez vos collaborateurs/membres d'équipe. Vous devriez aussi inclure les liens vers leurs profils GitHub et vers leurs médias sociaux.
-
-Aussi, si vous avez suivi des tutoriaux ou cité des éléments qui pourraient aider l'utilisateur à construire ce projet, incluez les liens.
-
-C'est simplement une façon de montrer que vous les avez appréciés, et d'aider les autres à obtenir une bonne copie du projet.
-
-7. Ajouter une licence
-Pour la plupart des fichiers README, c'est en général considéré comme la dernière partie. Ca permet aux autres développeurs de savoir ce qu'ils peuvent et ne peuvent pas faire avec votre projet.
-
-Nous avons différents types de licences qui dépendent du genre de projet sur lequel vous travaillez. En fonction de celui que vous allez choisir, cela va déterminer les contributions que votre projet aura.
-
-La plus commune est la licence GPL qui autorise les autres à faire des modifications à votre code et à l'utiliser dans un but commercial. Si vous avez besoin d'aide pour choisir une licence, jetez un coup d'oeil à ce lien: https://choosealicense.com/
-
-Jusqu'ici, nous avons couvert les conditions minimales  pour un bon README. Mais vous pourriez aussi avoir envie d'ajouter les sections suivantes pour rendre votre projet plus attractif et interactif.
-
-Sections README additionnelles
-8. Badges
-Les badges ne sont pas nécessaires, mais les utiliser est un moyen simple de faire savoir aux autres développeurs que vous savez ce que vous faites.
-
-Avoir cette section peut aussi aider à faire le lien avec des outils importants et aussi montrer quelques statistiques simples à propos de votre projet, comme le nombre de forks, de contributeurs, les tickets ouverts etc...
-
-Ci-dessous, voici une capture d'écran d'un de mes projets qui montre comment vous pouvez utiliser les badges:
-
-badges
-La bonne nouvelle à propos de cette section est qu'elle se met elle même à jour automatiquement.
-
-Vous ne savez pas d'où vous pouvez les prendre? Regardez les badges hébergés par shields.io. Ils ont des tonnes de badges pour vous aider à commencer. Vous pouvez ne pas comprendre ce qu'ils représentent tous pour l'instant, mais vous y arriverez avec le temps.
-
-9. Comment contribuer à un projet
-Ce sera le plus souvent utile si vous développez un projet open-source qui a besoin de la contribution d'autres développeurs. Vous ajouterez des lignes directrices pour les informer sur la façon de contribuer à votre projet.
-
-C'est aussi important de s'assurer que la licence que vous avez choisie pour un projet open-source est correcte pour éviter de futurs conflits. Et ajouter des lignes directrices de contribution jouera un grand rôle.
-
-Certaines des lignes directrices les plus communes incluent le Pacte du contributeur et le Guide de contribution . Ces documents vous donneront l'aide dont vous avez besoin quand vous définissez des règles pour votre projet.
-
-10. Incluez des tests
-Faîtes un effort supplémentaire et écrivez des tests pour votre application. Ensuite fournissez des exemples de code et comment les exécuter.
-
-Cela vous permettra de montrer que vous êtes confiant et que vous êtes certain que votre projet fonctionnera sans problèmes, ce qui donnera confiance aux autres personnes également.
-
-Points bonus
-Voici quelques points bonus à noter quand vous écrivez votre README:
-
-Gardez-le à jour - C'est une bonne pratique de s'assurer que votre fichier est toujours à jour. S'il y a des changements, assurez-vous de mettre à jour votre fichier quand c'est nécessaire.
-Choisissez une langue - Nous venons tous de différents endroits et nous parlons tous des langues différentes. Mais ça ne veut pas dire que vous devez traduire votre code en langue vernaculaire. Ecrire votre README en anglais fonctionnera car c'est une langue mondialement utilisée. Vous pourrez utiliser un outil de traduction si votre audience n'est pas familière avec l'anglais.
-Concluez
-Et maintenant vous l'avez, tout ce dont vous avez besoin pour améliorer votre fichier README, ou au moins pour commencer à écrire votre premier.
-
-Je suis dorénavant confiant sur le fait que vous puissiez ajouter un guide interactif et informatif à votre prochain projet ou à un projet existant et à le faire sortir du lot.
-
-
-
-  
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
