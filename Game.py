@@ -4,7 +4,7 @@ from Coord import Coord
 from Hero import Hero
 from Map import Map
 from Stairs import Stairs
-from handler import heal, teleport, throw , armure
+from handler import heal, teleport, throw, armure
 from Gold import Gold
 from utils import getch
 import theGame
@@ -21,22 +21,21 @@ class Game(object):
                   1: [Equipment("teleport potion", "!", usage=lambda self, hero: teleport(hero, True))],
                   2: [Equipment("bow", usage=lambda self, hero: throw(1, True))],
                   3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, False))],
-                  4: [Equipment("armure","s",usage=lambda self , hero : armure(hero))]
+                  4: [Equipment("armure", "Sh", usage=lambda self, hero: armure(hero))]
                   }
     """ available monsters """
     monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
                 1: [Creature("Ork", 6, strength=2), Creature("Blob", 10)],
-                2: [Creature("Invisible", 6, abbrv=Map.ground, strength=2, invisible=True)],
-                3: [Creature("Spider", 5, strength=2, fast=True)],
+                2: [Creature("Invisible", 6, abbrv=Map.ground, strength=2, invisible=True),Creature("Reaper", 10, "R", strength=2, fast=True)],
                 5: [Creature("Dragon", 20, strength=3)],
-                6: [Creature("Reaper", 10, abbrv=Map.ground, strength=2, invisible=True, fast=True)]}
+                }
 
     """ available actions """
     _actions = {'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)),
                 'q': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 0)),
                 's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)),
                 'd': lambda h: theGame.theGame()._floor.move(h, Coord(1, 0)),
-                'a': lambda h: theGame.theGame()._floor.move(h, Coord(-1,-1)),
+                'a': lambda h: theGame.theGame()._floor.move(h, Coord(-1, -1)),
                 'e': lambda h: theGame.theGame()._floor.move(h, Coord(1, -1)),
                 'w': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 1)),
                 'c': lambda h: theGame.theGame()._floor.move(h, Coord(1, 1)),
@@ -44,11 +43,34 @@ class Game(object):
                 'k': lambda h: h.__setattr__('hp', 0),
                 'u': lambda h: h.use(theGame.theGame().select(h._inventory)),
                 ' ': lambda h: None,
-                'h': lambda hero: theGame.theGame().addMessage("Actions disponibles : " + str(list(Game._actions.keys()))),
+                'h': lambda hero: theGame.theGame().addMessage(
+                    "Actions disponibles : " + str(list(Game._actions.keys()))),
                 'b': lambda hero: theGame.theGame().addMessage("I am " + hero.name),
+                '0': lambda h: h.use(h._inventory[0]),
+                '1': lambda h: h.use(h._inventory[1]),
+                '2': lambda h: h.use(h._inventory[2]),
+                '3': lambda h: h.use(h._inventory[3]),
+                '4': lambda h: h.use(h._inventory[4]),
+                '5': lambda h: h.use(h._inventory[5]),
+                '6': lambda h: h.use(h._inventory[6]),
+                '7': lambda h: h.use(h._inventory[7]),
+                '8': lambda h: h.use(h._inventory[8]),
+                '9': lambda h: h.use(h._inventory[9]),
                 }
 
-    def __init__(self, level=0, hero=None):
+    shop_items = [Equipment("healing potion", "♥", usage=lambda self, hero: heal(hero)),
+                  Equipment("teleport potion", "!", usage=lambda self, hero: teleport(hero, True)),
+                  Equipment("armure", "Sh", usage=lambda self, hero: armure(hero)),
+                  Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, False))
+                  ]
+    shop_prices = {"♥": 2,
+                  "!": 1,
+                 "Sh": 2,
+                  "w": 3,
+                   "*":2
+                  }
+
+    def __init__(self, level=1, hero=None):
         self._level = level
         self._messages = []
         if hero == None:
@@ -58,10 +80,11 @@ class Game(object):
 
     def buildFloor(self):
         """Creates a map for the current floor."""
-        self._level += 1
         self._floor = Map(hero=self._hero)
-        self._floor.put(self._floor._rooms[-1].randEmptyCoord(self._floor), Stairs())
-
+        if str(self._floor.get(self._floor.rooms[-1].center())) != ".":
+            self._floor.rm(self._floor.rooms[-1].center())
+        self._floor.put(self._floor.rooms[-1].center(), Stairs())
+        self._level += 1
 
     def addMessage(self, msg):
         """Adds a message in the message list."""
@@ -90,11 +113,11 @@ class Game(object):
     def randMonster(self):
         """Returns a random monster."""
         return self.randElement(Game.monsters)
-    
+
     def key(self):
         """the Hero recieves key his invventory"""
         self._hero.take(Equipment("key", '*'))
-        theGame.theGame().addMessage("The "+ self._hero.name +" aquired a key")
+        theGame.theGame().addMessage("The " + self._hero.name + " aquired a key")
 
     def select(self, l):
         print("Choose item> " + str([str(l.index(e)) + ": " + e.name for e in l]))
@@ -108,7 +131,6 @@ class Game(object):
         print("--- Welcome Hero! ---")
         while self._hero.hp > 0:
             print()
-            print("niveau:", self._level)
             print(self._floor)
             print(self._hero.description())
             print(self.readMessages())
