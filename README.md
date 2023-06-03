@@ -27,17 +27,17 @@ Table des matieres:
 Le projet consiste à ajouter des éléments au jeu Rogue que nous avons programmé en TPs 
 pendant ce semestre. A chaque élément est associé un degré de complexité, allant de 1 (facile) à 4 (difficile).
 
-2. Description du projet
+2. Description du projet :
 Le Rogue Like (ou rogue-like) est un sous-genre de jeu vidéo de rôle dans lequel le joueur explore un donjon infesté de monstres qu’il doit combattre pour gagner de l’expérience et des trésors. Le genre se caractérise notamment par la génération procédurale de ses niveaux, son système de mort permanente, son gameplay au tour par tour et la représentation des éléments qui le composent par des symboles ASCII sur une carte constituée de tuiles. La plupart des Rogue Like se déroulent dans un univers de fantasy qui reflète l’influence du jeu de rôle sur table Donjons et Dragons sur le genre.
 C'est une composante importante de votre projet que de nombreux développeurs négligent.
 
-3. Comment installer et exécuter le projet
+3. Comment installer et exécuter le projet :
 Au préalable : Installer tous les modules composant le projet dans le même répertoire, qui est propre à ce jeu.
 Sur Linux : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 main.py 
 Sur Windows : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 .\main.py 
 Sur VS code : ouvrir le fichier main.py puis lancer le jeu.
 
-4. Comment utiliser le projet
+4. Comment utiliser le projet :
 Lorsque le jeu est lancé vous vous situé sur une carte remplie de monstres, pour vous déplacer il suffit d’utiliser les touches :  
 - Flèche de gauche ou ‘q’ (pour aller à gauche) 
 - Flèche de droite ou ‘d’ (pour aller à droite) 
@@ -54,13 +54,13 @@ Les touches clé :
 - ‘b’ (biographie) pour savoir qui vous êtes 
 - ‘k’ (kill) pour tue votre personnage et quitter le jeu
 
-5. Inclure des crédits
+5. Les crédits :
 Ce projet a été effectué en trinôme avec :  
 - Marius Barbaud (BbdMarius) 
 - Garoux Ewan (GarouxE) 
 - Patel Lucah (bogwee) 
 
-6. Licence
+6. Licence :
 MIT License
 
 Copyright (c) [2023] [Jeu Rogue Like]
