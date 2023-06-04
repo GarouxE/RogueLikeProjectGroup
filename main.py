@@ -1,5 +1,4 @@
-from utils import _find_getch
-import theGame
+import Interface
 
-getch = _find_getch()
-theGame.theGame().play()
+jeu = Interface.Ecran()
+jeu.run()
