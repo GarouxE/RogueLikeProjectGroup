@@ -1,19 +1,18 @@
 # Projet de jeu Rogue Like en groupe de 3
-
-On a ajouté:
-  interface graphique     4                 Ewan      Fait
+Elements integres:
+  interface graphique                    
   deplacement intelligent 3                 A la fin
   repos                   1                 Lucah     en cours...
-  armure                  1                 Ewan      Fait   
-  gestion des salles      1                 Lucah     Fait
-  salle de tresor         2                 Lucah     Fait
-  rapide                  1                 Marius    Fait
-  diagonale               1                 Marius    Fait
-  invisible               1                 Ewan      Fait
-  point d'xp              1                 Marius    Fait
-  magasin                 2                 Lucah     Fait
-  piege                   1                 Lucah     Fait
-  inventaire limité       1                 Ewan      Fait
+  armure                   
+  gestion des salles     
+  salle de tresor         
+  rapide                 
+  diagonale              
+  invisible               
+  point d'xp              
+  magasin                
+  piege                   
+  inventaire limité      
   poison                  1                 Lucah     en cours...
   
 
@@ -35,6 +34,15 @@ Le Rogue Like (ou rogue-like) est un sous-genre de jeu vidéo de rôle dans lequ
 C'est une composante importante de votre projet que de nombreux développeurs négligent.
 
 3. Comment installer et exécuter le projet :
+
+-Les modules a installé sont:
+      Math
+      pygame
+      sys
+      time
+      random 
+      copy
+
 - Au préalable : Installer tous les modules composant le projet dans le même répertoire, qui est propre à ce jeu.
 - Sur Linux : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 main.py 
 - Sur Windows : Lancer le terminal, se déplacer vers le répertoire où se situe le projet rogue like puis lancer la commande : python3 .\main.py 
