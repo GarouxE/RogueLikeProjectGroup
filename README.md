@@ -18,11 +18,15 @@ Elements integres:
 
                   Total Fait: 15
 
-Description du projet:
 
 
 Table des matieres:
-    
+    1. Titre du projet : Jeu Rogue Like
+    2. Description du projet 
+    3. Comment installer et exécuter le projet 
+    4. Comment utiliser le projet 
+    5. Les crédits 
+    6. Licence 
 
 
 1. Titre du projet : Jeu Rogue Like
@@ -49,6 +53,9 @@ C'est une composante importante de votre projet que de nombreux développeurs n�
 - Sur VS code : ouvrir le fichier main.py puis lancer le jeu.
 
 4. Comment utiliser le projet :
+
+Pour lancer le jeu ouvre le fichier main dans le terminal et executer-le.
+
 Lorsque le jeu est lancé vous vous situé sur une carte remplie de monstres, pour vous déplacer il suffit d’utiliser les touches :  
 - Flèche de gauche ou ‘q’ (pour aller à gauche) 
 - Flèche de droite ou ‘d’ (pour aller à droite) 
