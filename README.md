@@ -21,12 +21,12 @@ Elements integres:
 
 
 Table des matieres:
-    1. Titre du projet : Jeu Rogue Like
-    2. Description du projet 
-    3. Comment installer et exécuter le projet 
-    4. Comment utiliser le projet 
-    5. Les crédits 
-    6. Licence 
+   - 1. Titre du projet : Jeu Rogue Like
+   - 2. Description du projet 
+   - 3. Comment installer et exécuter le projet 
+   - 4. Comment utiliser le projet 
+   - 5. Les crédits 
+   - 6. Licence 
 
 
 1. Titre du projet : Jeu Rogue Like
