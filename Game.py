@@ -81,9 +81,9 @@ class Game(object):
     def buildFloor(self):
         """Creates a map for the current floor."""
         self._floor = Map(hero=self._hero)
-        if str(self._floor.get(self._floor.rooms[-1].center())) != ".":
-            self._floor.rm(self._floor.rooms[-1].center())
-        self._floor.put(self._floor.rooms[-1].center(), Stairs())
+        if str(self._floor.get(self._floor._rooms[-1].center())) != ".":
+            self._floor.rm(self._floor._rooms[-1].center())
+        self._floor.put(self._floor._rooms[-1].center(), Stairs())
         self._level += 1
         reset = self._hero.check_elem("portoloin")
         if reset:
