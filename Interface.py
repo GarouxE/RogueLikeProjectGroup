@@ -158,6 +158,13 @@ class Ecran(object):
             self.game._floor._rooms[-1].center().x * 30 + 215, self.game._floor._rooms[-1].center().y * 30 + 65), 10)
 
     def dessine_inventaire(self):
+        pg.draw.rect(self.screen, "green", (800, 590, 700, 90), 0)
+        self.screen.blit(
+            pg.transform.scale(pg.image.load("Sprites/Fleches.png"), (100, 70)).convert_alpha(),
+            (800 , 600))
+        self.screen.blit(
+            pg.transform.scale(pg.image.load("Sprites/Touches.png"), (200, 200)).convert_alpha(),
+            (950 , 560))
         for i in range(len(self.hero._inventory)):
             self.screen.blit(
                 pg.transform.scale(pg.image.load(Inventaire[str(self.hero._inventory[i])]), (50, 50)).convert_alpha(),
