@@ -25,7 +25,7 @@ class Game(object):
                   }
     """ available monsters """
     monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
-                1: [Creature("Ork", 6, strength=2), Creature("Blob", 10)],
+                1: [Creature("Ork", 6, strength=2), Creature("Blob", 10), Creature("Spider", 8, 'x', strength=2, poison=True)],
                 2: [Creature("Invisible", 6, abbrv=Map.ground, strength=2, invisible=True),Creature("Reaper", 10, "R", strength=2, fast=True)],
                 5: [Creature("Dragon", 20, strength=3)],
                 }
