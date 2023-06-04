@@ -1,8 +1,12 @@
 # Projet de jeu Rogue Like en groupe de 3
+
+###########  Ewan Garoux      ###########
+###########  Marius Barbaud   ###########
+###########  Patel Lucah      ###########
+
+
 Elements integres:
   interface graphique                    
-  deplacement intelligent 3                 A la fin
-  repos                   1                 Lucah     en cours...
   armure                   
   gestion des salles     
   salle de tresor         
@@ -13,7 +17,7 @@ Elements integres:
   magasin                
   piege                   
   inventaire limité      
-  poison                  1                 Lucah     en cours...
+ 
   
 
                   Total Fait: 15
@@ -66,12 +70,12 @@ Lorsque le jeu est lancé vous vous situé sur une carte remplie de monstres, po
 - ‘w’ pour se déplacer diagonalement (en bas à gauche) 
 - ‘c’ pour se déplacer diagonalement (en bas à droite) 
 Les touches clé : 
-- ‘i’ (info) pour avoir une description entière de votre personnage 
 - ‘u’ (use) pour utiliser un Equipment qui se situe dans l'inventaire 
-- ‘h’ (help) pour savoir toutes les touches possibles 
-- ‘b’ (biographie) pour savoir qui vous êtes 
 - ‘k’ (kill) pour tue votre personnage et quitter le jeu
 
+
+Les touches pour la selection d'un numero:
+  -les touches SHIFT + NUMERO marche cependant pygame ne detecte pas le numeros Num Lock
 5. Les crédits :
 Ce projet a été effectué en trinôme avec :  
 - Marius Barbaud (BbdMarius) 
