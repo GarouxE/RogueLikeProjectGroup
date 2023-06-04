@@ -450,6 +450,3 @@ class Ecran(object):
                 pg.quit()
                 sys.exit()
 
-
-jeu = Ecran()
-jeu.run()
