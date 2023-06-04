@@ -5,7 +5,7 @@ class Creature(Element):
     """A creature that occupies the dungeon.
         Is an Element. Has hit points and strength."""
 
-    def __init__(self, name, hp, abbrv="", strength=1, invisible = False, fast=False):
+    def __init__(self, name, hp, abbrv="", strength=1, invisible = False, fast=False, poison=False):
         Element.__init__(self, name, abbrv)
         self.hp = hp
         self.armure = 0
@@ -14,6 +14,7 @@ class Creature(Element):
         self.xp = (self.strength*self.max_hp)//2
         self.is_invisble = invisible
         self.is_fast = fast
+        self.poison = poison
         if self.is_invisble:
             self.xp = int(self.xp*1.5)
         if self.is_fast:
@@ -47,6 +48,8 @@ class Creature(Element):
             other.earn_xp(self.xp)
         if self.key:
             theGame.theGame().key()
+        if self.poison:
+            other.poisonned = True
         return True
 
 
