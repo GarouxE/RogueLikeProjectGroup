@@ -14,6 +14,7 @@ class Hero(Creature):
         self.xp_cap = 10
         self.xp = 0
         self.gold = 0
+        self.poisonned = False
         self.goldInventory = {"gold" : self.gold}
     
     def description(self):
