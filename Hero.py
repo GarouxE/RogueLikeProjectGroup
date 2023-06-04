@@ -36,8 +36,9 @@ class Hero(Creature):
             
     def take(self, elem):
         """The hero takes adds the equipment to its inventory"""
-        self.checkEquipment(elem)
-        self._inventory.append(elem)
+        if len(self._inventory)<10:
+            self.checkEquipment(elem)
+            self._inventory.append(elem)
      
     def takeGold(self, elem):
         "the hero add gold to his inventory"
