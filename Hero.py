@@ -16,6 +16,7 @@ class Hero(Creature):
         self.gold = 0
         self.poisonned = False
         self.goldInventory = {"gold" : self.gold}
+        self.shopping = False
     
     def description(self):
         """Description of the hero"""
