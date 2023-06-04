@@ -15,7 +15,7 @@ Inventaire = {"♥":"Sprites/Health_potion.png",
 }
 
 def drawText(screen, text, x, y, w, h, size=14, color=(255, 0, 255), fontName="comicsansms"):
-    """Ecrit un texte centre en w et h"""
+    """Draws a text centered inside the w and h"""
     font = pg.font.SysFont(fontName, size)
     txt = font.render(text, True, color)
     screen.blit(txt, (x + (w - txt.get_width()) / 2, y + (h - txt.get_height()) / 2))
@@ -23,7 +23,6 @@ def drawText(screen, text, x, y, w, h, size=14, color=(255, 0, 255), fontName="c
 class Ecran(object):
 
     def __init__(self):
-      """Ouvre une fenetre pygame et initialise les evenements de base"""
         self.n = 0
         self.game = theGame.theGame()
         self.game.buildFloor()
@@ -40,13 +39,11 @@ class Ecran(object):
         self.clock = pg.time.Clock()
 
     def mettre_a_jour(self):
-      """Remet a jour l'eacran"""
         pg.display.flip()
         self.clock.tick(10)
         pg.display.set_caption(f'{self.clock.get_fps():.1f}')
 
     def donne_carte(self):
-      """Dessine la carte avec les monstres"""
         pg.draw.rect(self.screen, "grey", (200, 50, 600, 600), 0)
         t = {}
         for j in range(len(self.game._floor._mat)):
@@ -109,6 +106,10 @@ class Ecran(object):
                         self.screen.blit(
                             pg.transform.scale(pg.image.load("Sprites/Shield.png"), (30, 30)).convert_alpha(),
                             (j * 30 + 200, i * 30 + 50))
+                    if str(self.game._floor._mat[i][j]) == "x":
+                        self.screen.blit(
+                            pg.transform.scale(pg.image.load("Sprites/spider.png"), (30, 30)).convert_alpha(),
+                            (j * 30 + 200, i * 30 + 50))
                     if str(self.game._floor._mat[i][j]) == "D":
                         self.screen.blit(
                             pg.transform.scale(pg.image.load("Sprites/Dragon.png"), (30, 30)).convert_alpha(),
@@ -129,7 +130,6 @@ class Ecran(object):
 
 
     def dessine_sante(self):
-      """Dessine la vie l'armure le personnage et son xp"""
         pg.draw.rect(self.screen, "green", (1250, 90, 80,90), 0)
         self.screen.blit(
             pg.transform.scale(pg.image.load("Sprites/Hero.png"), (70, 70)).convert_alpha(),
@@ -160,9 +160,7 @@ class Ecran(object):
             armure -= 1
         pg.draw.circle(self.screen, 'green', (
             self.game._floor._rooms[-1].center().x * 30 + 215, self.game._floor._rooms[-1].center().y * 30 + 65), 10)
-
     def dessine_inventaire(self):
-      """Dessine les lelements presents dans l'inventaire du hero """
         pg.draw.rect(self.screen, "green", (800, 590, 700, 90), 0)
         self.screen.blit(
             pg.transform.scale(pg.image.load("Sprites/Fleches.png"), (100, 70)).convert_alpha(),
@@ -182,14 +180,12 @@ class Ecran(object):
         drawText(self.screen,"XP:"+ str(self.hero.xp)+"/"+str(self.hero.xp_cap), 1300, 75, 0, 0, size=24, color="green")
 
     def draw_shop_items(self):
-      """Dessine les elements dans la boutique """
         if theGame.theGame()._level != self.level:
             self.level = theGame.theGame()._level
             for i in range(4):
                 self.shop_items[i] = random.choice(copy.copy(theGame.theGame().shop_items))
 
     def selling_shop(self):
-      """Dessine et interagi le magasin pour vendre les objets"""
         self.screen.fill("black")
         self.screen.blit(pg.transform.scale(pg.image.load("Sprites/Shop_interior.png"), (1500, 700)).convert_alpha(),
                          (0, 0))
@@ -268,7 +264,6 @@ class Ecran(object):
                         self.hero._inventory.remove(self.hero._inventory[9])
                         return
     def shop(self):
-      """dessine et interagi pour le magasin pour acheter des objets"""
         self.screen.fill("black")
         self.screen.blit(pg.transform.scale(pg.image.load("Sprites/Shop_interior.png"), (1500, 700)).convert_alpha(),
                          (0, 0))
@@ -343,14 +338,11 @@ class Ecran(object):
 
 
     def dessine_carte(self):
-      """ Lance les fonctions de dessin"""
         self.screen.fill("black")
         self.donne_carte()
         self.dessine_sante()
         self.dessine_inventaire()
-        
     def select_slot(self):
-      """permet de choisir des elements de l'intaire"""
         while True:
             drawText(self.screen, "Veuillez choisir item a utiliser ou appuyer sur TAB pour sortir", 1025, 370, 0, 0, size=14)
             drawText(self.screen,"A",825,470,0,0,size= 24)
@@ -406,7 +398,6 @@ class Ecran(object):
 
 
     def verifier_evenements(self):
-      """ Verifie le mouvement du joeuer"""
 
 
         while True:
@@ -441,7 +432,6 @@ class Ecran(object):
                     return a
 
     def run(self):
-      """Lance la boucle principale"""
         self.dessine_carte()
         while True:
             print(self.game._floor)
@@ -462,4 +452,3 @@ class Ecran(object):
                 time.sleep(2)
                 pg.quit()
                 sys.exit()
-
