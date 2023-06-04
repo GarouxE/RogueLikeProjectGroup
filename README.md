@@ -16,11 +16,12 @@ Elements integres:
   point d'xp              
   magasin                
   piege                   
-  inventaire limité      
+  inventaire limité
+  poison
  
   
 
-                  Total Fait: 15
+                  Total Fait: 17
 
 
 
