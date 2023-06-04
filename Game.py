@@ -85,6 +85,9 @@ class Game(object):
             self._floor.rm(self._floor.rooms[-1].center())
         self._floor.put(self._floor.rooms[-1].center(), Stairs())
         self._level += 1
+        reset = self._hero.check_elem("portoloin")
+        if reset:
+            self._hero.remove(self._hero.check_elem("portoloin"))
 
     def addMessage(self, msg):
         """Adds a message in the message list."""
