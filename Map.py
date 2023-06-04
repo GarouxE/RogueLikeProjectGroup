@@ -168,6 +168,9 @@ class Map(object):
         """Moves the element e in the direction way."""
         orig = self.pos(e)
         dest = orig + way
+        if self._hero.poisonned:
+            self._hero.hp -= 2
+            self._hero.poisonned = False
         if dest in self:
             if self.get(dest) == Map.ground:
                 self._mat[orig.y][orig.x] = Map.ground
